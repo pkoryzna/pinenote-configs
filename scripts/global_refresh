@@ -1,0 +1,3 @@
+#!/usr/bin/env python
+import rockchip_ebc_custom_ioctl as reci
+reci.global_refresh()

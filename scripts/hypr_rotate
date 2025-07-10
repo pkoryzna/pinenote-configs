@@ -1,0 +1,24 @@
+#!/bin/bash
+
+NEW_ORIENTATION=${ORIENTATION:-$1}
+
+case "$NEW_ORIENTATION" in
+normal)
+    MONITOR_TRANSFORM=0
+    TOUCH_TRANSFORM=2;;
+90)
+    MONITOR_TRANSFORM=1
+    TOUCH_TRANSFORM=1;;
+270)
+    MONITOR_TRANSFORM=2
+    TOUCH_TRANSFORM=3;;
+inverted)
+    MONITOR_TRANSFORM=3
+    TOUCH_TRANSFORM=0;;
+*)
+    echo $0: unkown orientation $1
+    exit 1;;
+esac
+echo "orientation: $NEW_ORIENTATION, setting touch transform $TOUCH_TRANSFORM"
+# hyprctl keyword monitor DPI-1,preferred,auto,1.5,transform,"$MONITOR_TRANSFORM"
+hyprctl keyword input:touchdevice:transform $TOUCH_TRANSFORM
